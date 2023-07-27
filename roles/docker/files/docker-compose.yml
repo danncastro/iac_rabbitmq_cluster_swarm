@@ -1,0 +1,73 @@
+version: '3.7'
+services:
+  rabbitmq1:
+    image: rabbitmq:3-management
+    deploy:
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - "node.hostname==192.168.0.1"
+    hostname: rabbitmq1
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+    - rabbitmq-cluster
+    environment:
+    - RABBITMQ_ERLANG_COOKIE=EARLANGCOOKIE
+    - CLUSTERED=true
+    volumes:
+    - .:/var/lib/rabbitmq
+
+  rabbitmq2:
+    image: rabbitmq:3-management
+    deploy:
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - "node.hostname==192.168.0.2"
+    hostname: rabbitmq2
+    ports:
+      - "15671:15672"
+    networks:
+    - rabbitmq-cluster
+    environment:
+    - RABBITMQ_ERLANG_COOKIE=EARLANGCOOKIE
+    - CLUSTERED=true
+    volumes:
+    - .:/var/lib/rabbitmq
+
+  rabbitmq3:
+    image: rabbitmq:3-management
+    deploy:
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - "node.hostname==192.168.0.3"
+    hostname: rabbitmq3
+    ports:
+      - "15673:15672"
+    networks:
+    - rabbitmq-cluster
+    environment:
+    - RABBITMQ_ERLANG_COOKIE=EARLANGCOOKIE
+    - CLUSTERED=true
+    volumes:
+    - .:/var/lib/rabbitmq
+
+networks:
+  rabbitmq-cluster:
+    driver: overlay
+    external: true
