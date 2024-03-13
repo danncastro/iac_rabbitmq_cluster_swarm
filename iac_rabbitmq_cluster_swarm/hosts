@@ -1,0 +1,6 @@
+[docker_swarm_manager]
+192.168.0.1
+
+[docker_swarm_worker1]
+192.168.0.2
+192.168.0.3

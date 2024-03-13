@@ -1,0 +1,39 @@
+---
+- name: 'Parando containeres Docker'
+  shell: docker stack rm rabbitmq-cluster_swarm
+
+- name: ''
+  pause:
+    seconds: 10
+
+- name: 'Recriando network'
+  shell: docker network rm rabbitmq-cluster_swarm
+
+- name: ''
+  pause:
+    seconds: 10
+
+- name: 'Recriando network em Produção'
+  shell: docker network create -d overlay rabbitmq-cluster
+
+- name: 'Adicionando configurações do rabbitmq e docker-compose Produção'
+  copy: src=roles/docker/files/cluster-rabbitmq/{{ item }} dest=/$USER/rabbitmq
+  with_items:
+  - definitions.json
+  - rabbitmq.conf
+  - Dockerfile
+  - docker-compose.yml
+
+- name: 'Reiniciando serviço do Docker'
+  systemd:
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+    name: docker
+
+- name: 'Executando containeres em Produção'
+  shell: docker stack deploy -c /$USER/rabbitmq/docker-compose.yml rabbitmq-cluster_swarm
+
+- name: ''
+  pause:
+    seconds: 10

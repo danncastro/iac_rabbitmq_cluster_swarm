@@ -1,0 +1,30 @@
+---
+- name: Configurando cluster main
+  gather_facts: false
+  hosts: docker_swarm_manager !bad_hosts
+  become: yes
+  become_method: sudo
+  roles:
+  - docker
+  - manager
+  - preparation
+  - deploy
+
+- name: Configurando cluster main
+  gather_facts: false
+  hosts: docker_swarm_worker1 !bad_hosts
+  become: yes
+  become_method: sudo
+  roles:
+  - docker
+  - worker
+  - deploy
+
+- name: Configurando cluster main novamente
+  gather_facts: false
+  hosts: docker_swarm_manager !bad_hosts
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Finalizando configuração
+      shell: sh /$USER/clustering.sh

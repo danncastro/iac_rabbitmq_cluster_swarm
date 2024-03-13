@@ -1,0 +1,130 @@
+{
+    "bindings": [
+        {
+            "source": "exchanges.fanout.prod",
+            "vhost": "vhost_opcional",
+            "destination": "queue.prod",
+            "destination_type": "queue",
+            "routing_key": "exchanges.fanout.prod",
+            "arguments": {}
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "exchanges.fanout.prod",
+            "vhost": "vhost_opcional",
+            "type": "fanout",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "global_parameters": [],
+    "parameters": [],
+    "permissions": [
+        {
+        "configure": ".*",
+        "read": ".*",
+        "user": "usuario_gerenciamento_web",
+        "vhost": "vhost_opcional",
+        "write": ".*"
+        },
+        {
+        "configure": "",
+        "read": ".*",
+        "user": "usuario_aplicação1",
+        "vhost": "vhost_opcional",
+        "write": ".*"
+        },
+        {
+        "configure": "",
+        "read": ".*",
+        "user": "usuario_aplicação2",
+        "vhost": "vhost_opcional",
+        "write": ".*"
+        },
+        {
+        "configure": "",
+        "read": ".*",
+        "user": "usuario_aplicação3",
+        "vhost": "vhost_opcional",
+        "write": ".*"
+        }
+    ],
+    "policies": [
+        {
+        "name":"ha-all",
+        "vhost": "vhost_opcional",
+        "pattern":"", 
+        "definition":{"ha-mode":"all",
+        "ha-sync-mode":"automatic",
+        "ha-sync-batch-size":5}
+        },
+        {
+        "name":"ha-nodes",
+        "vhost": "vhost_opcional",
+        "pattern":"^nodes", 
+        "definition":{"ha-mode":"nodes",
+        "ha-params": ["rabbit@rabbitmq01", "rabbit@rabbitmq03"],
+        "ha-sync-mode":"automatic",
+        "ha-sync-batch-size":5}
+        }
+    ],
+    "queues": [
+        {
+            "name": "queue.prod",
+            "vhost": "vhost_opcional",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+            "x-dead-letter-exchange": "exchanges.fanout.prod",          
+            "x-queue-type": "quorum"
+        }
+        }
+    ],
+            "rabbit_version": "3.11.15",
+            "rabbitmq_version": "3.11.15",
+            "topic_permissions": [],
+    "users": [
+        {
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "limits": {},
+            "name": "usuario_gerenciamento_web",
+            "password_hash": "hash_criptografada",
+            "tags": []
+        },
+        {
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "limits": {},
+            "name": "usuario_aplicação1",
+            "password_hash": "hash_criptografada",
+            "tags": []
+        },
+        {
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "limits": {},
+            "name": "usuario_aplicação2",
+            "password_hash": "hash_criptografada",
+            "tags": []
+        },
+        {
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "limits": {},
+            "name": "usuario_aplicação3",
+            "password_hash": "hash_criptografada",
+            "tags": []
+        }
+    ],
+
+    "vhosts": [
+        {
+            "limits": [],
+            "metadata": {
+            "description": "Utilization virtual host",
+            "tags": []
+            },
+            "name": "vhost_opcional"
+        }
+    ]
+}
