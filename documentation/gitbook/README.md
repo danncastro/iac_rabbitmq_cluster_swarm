@@ -1,9 +1,3 @@
----
-description: >-
-  Podemos afirmar que o Ansible é uma ferramenta que auxilia no processo de
-  infraestrutura como código.
----
-
 # Ansible
 
 ### <mark style="color:red;">**Ansible e Infraestrutura sobre código:**</mark>
