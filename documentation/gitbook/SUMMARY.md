@@ -5,7 +5,8 @@
 
 ## Overview
 
-* [Introdução](overview/introducao.md)
+* [Introdução ao Ansible](overview/introducao-ao-ansible.md)
+* [Hands-on](overview/hands-on.md)
 
 ## Automatizando
 
