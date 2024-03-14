@@ -6,7 +6,10 @@
 ## Overview
 
 * [Introdução](overview/introducao.md)
-* [Automatizando](overview/automatizando.md)
-* [Cases](overview/cases.md)
-* [Quests](overview/quests.md)
-* [Comandos](overview/comandos.md)
+
+## Automatizando
+
+* [Criando a Infraestrutura](automatizando/criando-a-infraestrutura.md)
+* [Provisionando aplicação básica](automatizando/provisionando-aplicacao-basica.md)
+* [Criando a máquina do WordPress sem MySQL](automatizando/criando-a-maquina-do-wordpress-sem-mysql.md)
+* [Provisionamento utilizando Roles](automatizando/provisionamento-utilizando-roles.md)

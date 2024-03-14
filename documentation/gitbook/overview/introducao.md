@@ -2,23 +2,33 @@
 
 ### <mark style="color:red;">Instalação</mark>
 
-Para instalar no Ubuntu, utilize o comando abaixo:
+{% tabs %}
+{% tab title="Ubuntu" %}
+1. Para instalar no Ubuntu, utilize o comando abaixo:
 
 ```bash
 sudo apt-get install ansible
 ```
+{% endtab %}
 
-Para instalar no MacOs, instale o brew através do comando abaixo:
+{% tab title="MacOS" %}
+1. Para instalar no MacOs, instale o brew através do comando abaixo:
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-E logo após, execute o comando abaixo para instalar o Python e o Ansible:
+***
+
+2. Execute o comando abaixo para instalar o Python e o Ansible:
 
 ```bash
 brew install python@2 ansible@2.0
 ```
+
+***
+
+3. Após a instalação execute os comandos de validação&#x20;
 
 ```bash
 python -V
@@ -28,7 +38,7 @@ python -V
 ansible --version
 ```
 
-Devo mostrar algo parecido com a saída abaixo:
+* Devo mostrar algo parecido com a saída abaixo:
 
 ```bash
 ansible --version
@@ -39,7 +49,9 @@ ansible 2.6.5
   executable location = /usr/local/bin/ansible
   python version = 2.7.15 (default, Oct  2 2018, 11:47:18) [GCC 4.2.1 Compatible Apple L
 ```
+{% endtab %}
 
+{% tab title="Windows" %}
 {% hint style="warning" %}
 Ansible não tem suporte para Windows.
 {% endhint %}
@@ -49,6 +61,8 @@ Ansible não tem suporte para Windows.
 * Powershell 3++
 * Netframwork 4.0
 * winrm
+{% endtab %}
+{% endtabs %}
 
 ***
 
@@ -57,6 +71,7 @@ Ansible não tem suporte para Windows.
 * <mark style="color:red;">**Playbook:**</mark>  Arquivo yaml com as **"receitas de bolo"** do que queremos fazer.
 * <mark style="color:red;">**Arquivo de inventário:**</mark>  Lista todas as máquinas que serão utilizadas na configuração.
 * <mark style="color:red;">**Roles:**</mark> Representam uma forma de encapsular tarefas, variáveis e handlers para facilitar o reuso.
+* <mark style="color:red;">**Handler:**</mark>&#x20;
 * <mark style="color:red;">**Templates:**</mark>  Para trabalhar com os templates, o Ansible usa um outro framework que se chama Jinja. Ele faz parte dos template engines (ou template processor). Um template engine combina um template (HTML, XML, ou qualquer outro arquivo, configurações etc) com um modelo de dados para gerar um novo documento: [Template Engine Jinja.](http://jinja.pocoo.org/)
 
 ***
@@ -80,22 +95,30 @@ foo.var: 'tambem.nao.pode.ter.pontos'
 Todos os detalhes sobre as declarações e muito mais se encontra da documentação do Ansible: [Documentação sobre Variáveis.](http://docs.ansible.com/ansible/latest/playbooks\_variables.html#what-makes-a-valid-variable-name)
 {% endhint %}
 
-#### Execução da playbook
+{% tabs %}
+{% tab title="Execução" %}
+#### Rode a playbook executando:
 
 ```sh
 ansible-playbook caminho/nome_da_playbook.yml
 ```
+{% endtab %}
 
+{% tab title="Help" %}
 #### Documentação Ansible
 
-```conf
+```bash
 ansible-doc --help
 ```
+{% endtab %}
+{% endtabs %}
 
 ***
 
 #### <mark style="color:yellow;">Estrutura básica de um arquivo de inventário:</mark>
 
+{% tabs %}
+{% tab title="Linux" %}
 <pre class="language-sh"><code class="lang-sh"><strong>[servidores_um]
 </strong>nome_variavel ansible_ssh_host=ip ansible_ssh_user=user ansible_ssh_pass=key
 
@@ -109,15 +132,17 @@ deb ansible_ssh_host=10.20.20.120 ansible_ssh_user=ansible ansible_ssh_pass=Senh
 servidor_exemplo1
 servidor_exemplo2
 </code></pre>
+{% endtab %}
 
+{% tab title="Windows" %}
 ```sh
-# WINDOWS
-
 [nomeGrupo:nomeVars]
 ansible_port=port
 ansible_connection=winrm
 ansible_winrm_server_cert_valiation=ignore
 ```
+{% endtab %}
+{% endtabs %}
 
 ***
 
